@@ -26,6 +26,6 @@
 
 @interface NSIndexSet (pagination)
 
-+(NSIndexSet*) indexSetForPageIndex:(NSUInteger)pageIndex withNumberOfItemsPerPage:(NSUInteger)numberOfItemsPerPage;
++(NSIndexSet*) indexSetForPageIndex:(NSUInteger)pageIndex withNumberOfItemsPerPage:(NSUInteger)numberOfItemsPerPage withNumberOfItemsOnThisPage:(NSUInteger)numberOfItemsOnThisPage;
 
 @end

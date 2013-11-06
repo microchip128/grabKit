@@ -60,7 +60,7 @@ static NSString *kGRKServiceNameDevice = @"device";
         cancelAllCompleteBlock = nil;
         
         _requiresConnection = NO;
-    }     
+    }
     
     return self;
 }
@@ -225,12 +225,12 @@ Then : we have to fetch from "(page index) * (number of photo per page)" to "ran
  This is what the finalN var is made for, avoiding that way the NSRangeException.
  */
     
-    NSUInteger finalNumberOfPhotosPerPage = numberOfPhotosPerPage;
+    NSUInteger numberOfPhotosOnCurrentPage = numberOfPhotosPerPage;
     if ( pageIndex*numberOfPhotosPerPage + numberOfPhotosPerPage > album.count ){
-        finalNumberOfPhotosPerPage = MAX(0,album.count - pageIndex*numberOfPhotosPerPage);
+        numberOfPhotosOnCurrentPage = MAX(0,album.count - pageIndex*numberOfPhotosPerPage);
     }
 
-    NSIndexSet * indexSetAtThisPageIndex = [NSIndexSet indexSetForPageIndex:pageIndex withNumberOfItemsPerPage:finalNumberOfPhotosPerPage];
+    NSIndexSet * indexSetAtThisPageIndex = [NSIndexSet indexSetForPageIndex:pageIndex withNumberOfItemsPerPage:numberOfPhotosPerPage withNumberOfItemsOnThisPage:numberOfPhotosOnCurrentPage];
     
     [self incrementQueriesCount];
     cancelAllFlag = NO;

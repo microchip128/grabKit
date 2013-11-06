@@ -140,24 +140,16 @@ GRKAlbumDateProperty * const kGRKAlbumDatePropertyDateUpdated = @"kGRKAlbumDateP
         return [NSArray array];
     }
     
+    NSUInteger numberOfPhotosOnCurrentPage = numberOfPhotosPerPage;
     
-    
-    
-    // create a NSIndexSet for the desired page (N photos starting at page PN)
-    NSIndexSet * indexSetForThisPage = [NSIndexSet indexSetForPageIndex:pageIndex withNumberOfItemsPerPage:numberOfPhotosPerPage];
-    
-    
-    // If the last photo of the desired page is further than the last photo, 
-    // we have to change the indexSet to fit : first photo of the page -> last photo 
-    // (because we use the method [NSArray objectsAtIndexes], which throws NSException for out of bounds indexes...)
     if ( pageIndex*numberOfPhotosPerPage + numberOfPhotosPerPage > [_photosIds count] ){
     
-        NSUInteger correctedNumberOfPhotosPerPage = [_photosIds count] - pageIndex*numberOfPhotosPerPage;
-        
-        indexSetForThisPage = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(pageIndex*numberOfPhotosPerPage, correctedNumberOfPhotosPerPage)];
+        numberOfPhotosOnCurrentPage = [_photosIds count] - pageIndex*numberOfPhotosPerPage;
         
     }
     
+    // create a NSIndexSet for the desired page (N photos starting at page PN)
+    NSIndexSet * indexSetForThisPage = [NSIndexSet indexSetForPageIndex:pageIndex withNumberOfItemsPerPage:numberOfPhotosPerPage withNumberOfItemsOnThisPage:numberOfPhotosOnCurrentPage];
 	
     // Ask for the photos ids at these indexes
 	NSMutableArray * keysForThisPage = nil;

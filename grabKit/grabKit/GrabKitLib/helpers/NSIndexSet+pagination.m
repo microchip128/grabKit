@@ -26,10 +26,10 @@
 
 @implementation NSIndexSet (pagination)
 
-+(NSIndexSet*) indexSetForPageIndex:(NSUInteger)pageIndex withNumberOfItemsPerPage:(NSUInteger)numberOfItemsPerPage;
++(NSIndexSet*) indexSetForPageIndex:(NSUInteger)pageIndex withNumberOfItemsPerPage:(NSUInteger)numberOfItemsPerPage withNumberOfItemsOnThisPage:(NSUInteger)numberOfItemsOnThisPage
 {
     // create a NSRange for the desired range (N items starting at page PN)
-    NSRange range = NSMakeRange(pageIndex*numberOfItemsPerPage, numberOfItemsPerPage);
+    NSRange range = NSMakeRange(pageIndex*numberOfItemsPerPage, numberOfItemsOnThisPage);
     
 	// create a NSIndexSet from this range
     NSIndexSet * indexSetForThisRange = [NSIndexSet indexSetWithIndexesInRange:range];
